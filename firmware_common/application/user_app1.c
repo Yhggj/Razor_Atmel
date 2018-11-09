@@ -87,7 +87,19 @@ Promises:
 */
 void UserApp1Initialize(void)
 {
- 
+ HEARTBEAT_OFF();
+ LedOff(WHITE);
+ LedOff(PURPLE);
+ LedOff(BLUE);
+ LedOff(CYAN);
+ LedOff(GREEN);
+ LedOff(YELLOW);
+ LedOff(ORANGE);
+ LedOff(RED);
+ /* Set Backlight to White */
+ LedOn(LCD_RED);
+ LedOn(LCD_BLUE);
+ LedOn(LCD_GREEN);
   /* If good initialization, set state to Idle */
   if( 1 )
   {
@@ -136,7 +148,88 @@ State Machine Function Definitions
 /* Wait for ??? */
 static void UserApp1SM_Idle(void)
 {
+  static u16 u16BlinkCount = 0;
+  static u32 u8Counter = 0;
+  
+  u16BlinkCount++;
+  if(u16BlinkCount == 500)
+  {
+    u16BlinkCount = 0;
+    u8Counter++;
+    if(u8Counter == 256)
+    {
+      u8Counter = 0;
+    }
+    if(u8Counter & 0x01)
+    {
+      LedOn(RED);
+    }
+    else
+    {
+      LedOff(RED);
+    }
 
+    if(u8Counter & 0x02)
+    {
+      LedOn(ORANGE);
+    }
+    else
+    {
+      LedOff(ORANGE);
+    }
+
+    if(u8Counter & 0x04)
+    {
+      LedOn(YELLOW);
+    }
+    else
+    {
+      LedOff(YELLOW);
+    }
+
+    if(u8Counter & 0x08)
+    {
+      LedOn(GREEN);
+    }
+    else
+    {
+      LedOff(GREEN);
+    }
+    
+    if(u8Counter & 0x10)
+    {
+      LedOn(CYAN);
+    }
+    else
+    {
+      LedOff(CYAN);
+    }
+    if(u8Counter & 0x20)
+    {
+      LedOn(BLUE);
+    }
+    else
+    {
+      LedOff(BLUE);
+    }
+    if(u8Counter & 0x40)
+    {
+      LedOn(PURPLE);
+    }
+    else
+    {
+      LedOff(PURPLE);
+    }
+    if(u8Counter & 0x80)
+    {
+      LedOn(WHITE);
+    }
+    else
+    {
+      LedOff(WHITE);
+    }
+  }
+  
 } /* end UserApp1SM_Idle() */
     
 
